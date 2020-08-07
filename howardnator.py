@@ -22,12 +22,4 @@ base = base[base.DOI.notnull()]
 #Select the papers in which the author name is available
 base = base[base.Authors != "[No author name available]"]
 
-base["Countries"] = base["Affiliations"].apply(lambda x: 'lucas '.join([c.split(",")[-1].strip() for c in str(x).split(";")]))
-
-string_borba = "asd, ase, sdads; bosta, oew, ewed, dasq"
-
-borba = string_borba.split(";")
-
-for i in borba:
-    a = i.split(",")
-
+base["Countries"] = base["Affiliations"].apply(lambda x: ', '.join([c.split(",")[-1].strip() for c in str(x).split(";")]))
