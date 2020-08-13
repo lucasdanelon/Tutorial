@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import math
 
 #Define score formula
 #n_ACIS meaning number of Authors, Countries or Institutions
@@ -9,10 +10,15 @@ def score(n_ACIs, p_ACI):
     coef = 1.5**(n_ACIs - p_ACI)/(np.sum(1.5**(np.arange(1, n_ACIs + 1 ) - 1)))
     return coef
 
-def distribute_points(base,test):
+def check_nan(x):
+    return (x!=x)
+
+def distribute_points(base,test,sep):
     final_table = {}
     for paper in range(base.shape[0]):
-        ACI_list = base.iloc[paper][test].split(",")
+        if check_nan(base.iloc[paper][test]):
+            continue
+        ACI_list = base.iloc[paper][test].split(sep)
         ACI_list = [ACI.strip() for ACI in ACI_list]
 
         #remove (1), (2), (3)
@@ -41,6 +47,24 @@ def dict_to_df(my_dict,name1,name2):
     final = pd.DataFrame(data = Results)
     return final
 
+def find_institution(base):
+    inst = []
+    sub = ["university", "University","Université", "Università", "Universität", "Institute", "institute", "Corporation", "corporation",
+    "Research center", "Research Center", "Research Centre", "Polytechnic", "Polytechnical"]
+    for paper in range(base.shape[0]):
+        inst.append([])
+        if check_nan(base.iloc[paper]["Affiliations"]):
+            inst[paper]= ', '.join(inst[paper])
+            continue
+        ACI_list = base.iloc[paper]["Affiliations"].split(";")
+        for aff in ACI_list:
+            dept = aff.split(",")
+            for d in dept:
+                if any(substring in d for substring in sub):
+                    inst[paper] += [d.strip()]
+        inst[paper]= ', '.join(inst[paper])
+    return inst
+
 def main():
     #Read database
     base = pd.read_csv("scopus.csv", sep = ",")
@@ -63,22 +87,26 @@ def main():
     base = base[base.Authors != "[No author name available]"]
 
     base["Countries"] = base["Affiliations"].apply(lambda x: ', '.join([c.split(",")[-1].strip() for c in str(x).split(";")]))
-    
-    #base["Affiliations"].apply(lambda x: str(x))
+
+    # base["Institutions"] = base["Affiliations"].apply(lambda x: ', '.join([c.split(",")[-2].strip() for c in str(x).split(";")]))
+    base["Universities"] = find_institution(base)
     #base[['First','Last']] = df.Name.str.split(expand=True)
     #base["Affiliations"].values.tolist()
     #base["Institutions"] = base["Affiliations"].apply(lambda x: str(x).split(";"))
     #Institutions = base["Affiliations"].values.tolist()
     #test = Institutions.apply(lambda x: str(x).split(";"))
 
-    Authors_Dict = distribute_points(base,"Authors")
-    Countries_Dict = distribute_points(base,"Countries")
+    Authors_Dict = distribute_points(base,"Authors",",")
+    Countries_Dict = distribute_points(base,"Countries",",")
+    Institutions_Dict = distribute_points(base,"Universities",",")
 
     Authors_final = dict_to_df(Authors_Dict,"Authors","Scores")
     Countries_final = dict_to_df(Countries_Dict,"Countries","Scores")
+    Institutions_final = dict_to_df(Institutions_Dict,"Institutions","Scores")
 
-    Authors_final.to_csv("test.csv")
-    Countries_final.to_csv("countriestable2.csv")
+    Authors_final.to_csv("authors_table.csv")
+    Countries_final.to_csv("countries_table.csv")
+    Institutions_final.to_csv("institutions_table.csv")
 
 if __name__=="__main__":
     main()
