@@ -88,13 +88,7 @@ def main():
 
     base["Countries"] = base["Affiliations"].apply(lambda x: ', '.join([c.split(",")[-1].strip() for c in str(x).split(";")]))
 
-    # base["Institutions"] = base["Affiliations"].apply(lambda x: ', '.join([c.split(",")[-2].strip() for c in str(x).split(";")]))
     base["Universities"] = find_institution(base)
-    #base[['First','Last']] = df.Name.str.split(expand=True)
-    #base["Affiliations"].values.tolist()
-    #base["Institutions"] = base["Affiliations"].apply(lambda x: str(x).split(";"))
-    #Institutions = base["Affiliations"].values.tolist()
-    #test = Institutions.apply(lambda x: str(x).split(";"))
 
     Authors_Dict = distribute_points(base,"Authors",",")
     Countries_Dict = distribute_points(base,"Countries",",")
@@ -104,9 +98,15 @@ def main():
     Countries_final = dict_to_df(Countries_Dict,"Countries","Scores")
     Institutions_final = dict_to_df(Institutions_Dict,"Institutions","Scores")
 
-    Authors_final.to_csv("authors_table.csv")
-    Countries_final.to_csv("countries_table.csv")
-    Institutions_final.to_csv("institutions_table.csv")
+    pd.to_numeric(Authors_final.Scores)
+
+    Authors_final.sort_values("Scores", ascending=False)
+    Countries_final.sort_values(by = 'Scores', ascending=True)
+    Institutions_final.sort_values(by = 'Scores', ascending=True)
+
+    Authors_final.to_csv("authors_table.csv", index = False, sep = ';', float_format = '%.2f')
+    Countries_final.to_csv("countries_table.csv", index = False, sep = ';', float_format = '%.2f')
+    Institutions_final.to_csv("institutions_table.csv", index = False, sep = ';', float_format = '%.2f')
 
 if __name__=="__main__":
     main()

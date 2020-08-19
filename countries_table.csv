@@ -1,72 +1,72 @@
-,Countries,Scores
-0,China,103.4660579134666
-1,Germany,160.36005705706256
-2,United States,123.11386838644653
-3,France,21.970456974238996
-4,Italy,46.160899514553776
-5,Canada,18.275829383886254
-6,Sweden,26.40590904212831
-7,Austria,13.708333254321175
-8,Brazil,10.166959011652715
-9,Australia,8.951210824910373
-10,Singapore,11.33233082706767
-11,New Zealand,5.294736842105263
-12,Slovakia,5.2
-13,Hong Kong,4.384695115185363
-14,United Kingdom,65.86934069066098
-15,Spain,18.54472820768655
-16,Greece,14.523076923076923
-17,Finland,21.389473684210525
-18,South Korea,26.57732793522267
-19,Switzerland,14.399574035343553
-20,Denmark,10.736842105263158
-21,India,14.473684210526315
-22,Cuba,0.5004048582995951
-23,Slovenia,3.9157894736842103
-24,Belgium,4.839145780757482
-25,Netherlands,12.475915828302835
-26,Hungary,10.86401075780264
-27,Estonia,5.473684210526316
-28,Russian Federation,75.13545022708094
-29,Norway,11.773279352226721
-30,Portugal,9.684538908335368
-31,Czech Republic,5.08421052631579
-32,Japan,11.153846153846155
-33,Croatia,1.6
-34,South Africa,3.726315789473684
-35,nan,9.0
-36,Latvia,0.21052631578947367
-37,Taiwan,5.315789473684211
-38,Romania,2.6
-39,Pakistan,0.4
-40,Iran,0.6720647773279352
-41,Accenture,1.0
-42,Poland,5.589473684210526
-43,Palestine,0.6
-44,Mexico,2.8388663967611336
-45,Turkey,3.123076923076923
-46,United Arab Emirates,1.789473684210526
-47,Israel,3.0
-48,Luxembourg,1.4072874493927126
-49,Colombia,2.4153846153846157
-50,Iraq,0.8
-51,Jaguar Land Rover,0.4
-52,Transocean Inc.,0.4
-53,Serbia,1.0
-54,Lebanon,0.18461538461538463
-55,Ireland,3.184615384615385
-56,Ukraine,2.0
-57,Thailand,2.4153846153846157
-58,U.K..,0.6
-59,France.,0.4
-60,Power Supply Technology Division,1.0
-61,Morocco,0.21052631578947367
-62,Macau,0.18461538461538463
-63,Indonesia,0.21052631578947367
-64,Flanders Make,0.3157894736842105
-65,Bulgaria,0.6
-66,Institute of Communications Technology,0.4153846153846154
-67,Department of Electrical Engineering,0.18461538461538463
-68,Malaysia,1.0
-69,Uzbekistan,1.0
-70,Belarus,1.0
+Countries;Scores
+China;103.47
+Germany;160.36
+United States;123.11
+France;21.97
+Italy;46.16
+Canada;18.28
+Sweden;26.41
+Austria;13.71
+Brazil;10.17
+Australia;8.95
+Singapore;11.33
+New Zealand;5.29
+Slovakia;5.20
+Hong Kong;4.38
+United Kingdom;65.87
+Spain;18.54
+Greece;14.52
+Finland;21.39
+South Korea;26.58
+Switzerland;14.40
+Denmark;10.74
+India;14.47
+Cuba;0.50
+Slovenia;3.92
+Belgium;4.84
+Netherlands;12.48
+Hungary;10.86
+Estonia;5.47
+Russian Federation;75.14
+Norway;11.77
+Portugal;9.68
+Czech Republic;5.08
+Japan;11.15
+Croatia;1.60
+South Africa;3.73
+nan;9.00
+Latvia;0.21
+Taiwan;5.32
+Romania;2.60
+Pakistan;0.40
+Iran;0.67
+Accenture;1.00
+Poland;5.59
+Palestine;0.60
+Mexico;2.84
+Turkey;3.12
+United Arab Emirates;1.79
+Israel;3.00
+Luxembourg;1.41
+Colombia;2.42
+Iraq;0.80
+Jaguar Land Rover;0.40
+Transocean Inc.;0.40
+Serbia;1.00
+Lebanon;0.18
+Ireland;3.18
+Ukraine;2.00
+Thailand;2.42
+U.K..;0.60
+France.;0.40
+Power Supply Technology Division;1.00
+Morocco;0.21
+Macau;0.18
+Indonesia;0.21
+Flanders Make;0.32
+Bulgaria;0.60
+Institute of Communications Technology;0.42
+Department of Electrical Engineering;0.18
+Malaysia;1.00
+Uzbekistan;1.00
+Belarus;1.00
