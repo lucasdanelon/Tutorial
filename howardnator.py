@@ -78,9 +78,9 @@ def find_institution(base):
         inst[paper]= ', '.join(inst[paper])
     return inst
 
-def main():
+def main(filename):
     #Read database
-    base = pd.read_csv("scopus.csv", sep = ",")
+    base = pd.read_csv(filename, sep = ",")
 
     #Hide unnecessary information from the database
     columns_to_drop = ["Author(s) ID","Volume","Issue",
@@ -120,4 +120,5 @@ def main():
     Institutions_final.to_csv("institutions_table.csv", index = False, sep = ';', float_format = '%.2f')
 
 if __name__=="__main__":
-    main()
+    filename="scopus.csv"
+    main(filename)
