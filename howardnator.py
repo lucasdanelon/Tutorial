@@ -49,8 +49,21 @@ def dict_to_df(my_dict,name1,name2):
 
 def find_institution(base):
     inst = []
-    sub = ["university", "University","Université", "Università", "Universität", "Institute", "institute", "Corporation", "corporation",
-    "Research center", "Research Center", "Research Centre", "Polytechnic", "Polytechnical"]
+    sub = ["Universidade", "universidade",
+           "University", "university",
+           "Université", "université",
+           "Universite", "universite",
+           "Università", "università",
+           "Universita", "universita",
+           "Universität", "universität"
+           "Universitat", "universitat"
+           "Institute", "institute",
+           "Corporation", "corporation",
+           "Corporate research", "corporate research"
+           "Research center", "Research Center", "Research Centre",
+           "Polytechnic", "polytechnic"
+           "Polytechnical","polytechnical"
+           "Politecnico", "politecnico"]
     for paper in range(base.shape[0]):
         inst.append([])
         if check_nan(base.iloc[paper]["Affiliations"]):
@@ -98,11 +111,9 @@ def main():
     Countries_final = dict_to_df(Countries_Dict,"Countries","Scores")
     Institutions_final = dict_to_df(Institutions_Dict,"Institutions","Scores")
 
-    pd.to_numeric(Authors_final.Scores)
-
-    Authors_final=Authors_final.sort_values("Scores", ascending=False)
-    Countries_final=Countries_final.sort_values(by = 'Scores', ascending=False)
-    Institutions_final=Institutions_final.sort_values(by = 'Scores', ascending=False)
+    Authors_final = Authors_final.sort_values("Scores", ascending=False)
+    Countries_final = Countries_final.sort_values("Scores", ascending=False)
+    Institutions_final = Institutions_final.sort_values("Scores", ascending=False)
 
     Authors_final.to_csv("authors_table.csv", index = False, sep = ';', float_format = '%.2f')
     Countries_final.to_csv("countries_table.csv", index = False, sep = ';', float_format = '%.2f')
