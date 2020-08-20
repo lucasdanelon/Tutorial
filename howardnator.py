@@ -100,9 +100,9 @@ def main():
 
     pd.to_numeric(Authors_final.Scores)
 
-    Authors_final.sort_values("Scores", ascending=False)
-    Countries_final.sort_values(by = 'Scores', ascending=True)
-    Institutions_final.sort_values(by = 'Scores', ascending=True)
+    Authors_final=Authors_final.sort_values("Scores", ascending=False)
+    Countries_final=Countries_final.sort_values(by = 'Scores', ascending=False)
+    Institutions_final=Institutions_final.sort_values(by = 'Scores', ascending=False)
 
     Authors_final.to_csv("authors_table.csv", index = False, sep = ';', float_format = '%.2f')
     Countries_final.to_csv("countries_table.csv", index = False, sep = ';', float_format = '%.2f')
