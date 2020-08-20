@@ -115,10 +115,14 @@ def main(filename):
     Countries_final = Countries_final.sort_values("Scores", ascending=False)
     Institutions_final = Institutions_final.sort_values("Scores", ascending=False)
 
-    Authors_final.to_csv("authors_table.csv", index = False, sep = ';', float_format = '%.2f')
-    Countries_final.to_csv("countries_table.csv", index = False, sep = ';', float_format = '%.2f')
-    Institutions_final.to_csv("institutions_table.csv", index = False, sep = ';', float_format = '%.2f')
+    return Authors_final, Countries_final, Institutions_final
 
 if __name__=="__main__":
     filename="scopus.csv"
-    main(filename)
+
+    Authors_finalAuthors_final, Countries_final, Institutions_final = main(filename)
+
+    savepath=""
+    Authors_finalAuthors_final.to_csv(savepath+"authors_table.csv", index = False, sep = ';', float_format = '%.2f')
+    Countries_finalCountries_final.to_csv(savepath+"countries_table.csv", index = False, sep = ';', float_format = '%.2f')
+    Institutions_finalInstitutions_final.to_csv(savepath+"institutions_table.csv", index = False, sep = ';', float_format = '%.2f')
