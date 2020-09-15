@@ -29,7 +29,9 @@ ha = hf.add_subplot(111)
 
 for lam in np.arange(0,3.1,0.5):
     result = apply_formula(x,lam)
-    ha.plot(x, result, label=str(lam))
+    ha.plot(x, result, label=r'$\lambda$ = '+str(lam))
 
 ha.legend()
+plt.ylabel("Score")
+plt.xlabel("Citations")
 plt.show()

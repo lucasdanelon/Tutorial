@@ -135,7 +135,7 @@ def main(filename):
     return Authors_final, Countries_final, Institutions_final
 
 if __name__=="__main__":
-    filename="scopus.csv"
+    filename="formula.csv"
 
     Authors_final, Countries_final, Institutions_final = main(filename)
 
