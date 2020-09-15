@@ -7,31 +7,29 @@ Created on Mon Sep  7 16:54:55 2020
 import matplotlib.pyplot as plt
 import numpy as np
 
-x = np.arange(1,51,1)   # start,stop,step
+x = np.arange(0,201,1)   # start,stop,step
 
-def score(n_elems, p_elem):
-    coef = 1.5**(n_elems - p_elem)/(np.sum(1.5**(np.arange(1, n_elems + 1 ) - 1)))
+def focal_loss(p,maximum,lam=0.5):
+    base = -(1-maximum)**lam*np.log(maximum)
+    if p==0:
+        return (base+(1-2*maximum)**lam*np.log(2*maximum))/2
+    coef = base+(1-p)**lam*np.log(p)
     return coef
 
-def focal_loss(p,lam=2):
-    coef = -(1-p)**lam*np.log(p)
-    return coef
-
-def apply_formula(x):
-    result = np.zeros((len(x),len(x)))
-    for j in x:
-        for k in np.arange(1,j+1):
-            result[j-1][k-1] = score(j,k)
-            
+def apply_formula(x,lam=0.5):
+    maximum = np.max(x)
+    x=x/maximum
+    result = np.zeros((len(x)))
+    for index,k in enumerate(x):
+        result[index] = focal_loss(k,0.5/maximum,lam)
     return result
 
-
-result = apply_formula(x)
-
 hf = plt.figure()
-ha = hf.add_subplot(111, projection='3d')
+ha = hf.add_subplot(111)
 
-X, Y = np.meshgrid(x, x)  # `plot_surface` expects `x` and `y` data to be 2D
-ha.plot_surface(X, Y, result)
+for lam in np.arange(0,3.1,0.5):
+    result = apply_formula(x,lam)
+    ha.plot(x, result, label=str(lam))
 
+ha.legend()
 plt.show()

@@ -13,11 +13,24 @@ def score(n_ACIs, p_ACI):
 def check_nan(x):
     return (x!=x)
 
-def distribute_points(base,test,sep):
+def focal_loss(p,maximum,lam=0.5):
+    # Calculate the base score for the top number of citations
+    base = -(1-maximum)**lam*np.log(maximum)
+    
+    # If there are no citations we consider that the author received a score of half 1 citation
+    if check_nan(p):
+        return (base+(1-2*maximum)**lam*np.log(2*maximum))/2
+    
+    coef = base+(1-p)**lam*np.log(p)
+    return coef
+
+
+def distribute_points(base,test,sep,base_score):
     final_table = {}
     for paper in range(base.shape[0]):
         if check_nan(base.iloc[paper][test]):
             continue
+        citations = base.iloc[paper]["Normalized_citations"]
         ACI_list = base.iloc[paper][test].split(sep)
         ACI_list = [ACI.strip() for ACI in ACI_list]
 
@@ -29,9 +42,9 @@ def distribute_points(base,test,sep):
         n_ACIs = len(ACI_list)
         for pos,ACI in enumerate(ACI_list):
             if ACI in final_table:
-                final_table[ACI] += score(n_ACIs,pos+1)
+                final_table[ACI] += score(n_ACIs,pos+1)*focal_loss(citations, base_score)
             else:
-                final_table[ACI] = score(n_ACIs,pos+1)
+                final_table[ACI] = score(n_ACIs,pos+1)*focal_loss(citations, base_score)
 
     return final_table
 
@@ -103,9 +116,13 @@ def main(filename):
 
     base["Universities"] = find_institution(base)
 
-    Authors_Dict = distribute_points(base,"Authors",",")
-    Countries_Dict = distribute_points(base,"Countries",",")
-    Institutions_Dict = distribute_points(base,"Universities",",")
+    max_citations = base["Cited by"].max()
+    base["Normalized_citations"]=base["Cited by"]/max_citations
+    base_score = 0.5/max_citations
+
+    Authors_Dict = distribute_points(base,"Authors",",",base_score)
+    Countries_Dict = distribute_points(base,"Countries",",",base_score)
+    Institutions_Dict = distribute_points(base,"Universities",",",base_score)
 
     Authors_final = dict_to_df(Authors_Dict,"Authors","Scores")
     Countries_final = dict_to_df(Countries_Dict,"Countries","Scores")
@@ -120,9 +137,9 @@ def main(filename):
 if __name__=="__main__":
     filename="scopus.csv"
 
-    Authors_finalAuthors_final, Countries_final, Institutions_final = main(filename)
+    Authors_final, Countries_final, Institutions_final = main(filename)
 
     savepath=""
-    Authors_finalAuthors_final.to_csv(savepath+"authors_table.csv", index = False, sep = ';', float_format = '%.2f')
-    Countries_finalCountries_final.to_csv(savepath+"countries_table.csv", index = False, sep = ';', float_format = '%.2f')
-    Institutions_finalInstitutions_final.to_csv(savepath+"institutions_table.csv", index = False, sep = ';', float_format = '%.2f')
+    Authors_final.to_csv(savepath+"authors_table.csv", index = False, sep = ';', float_format = '%.2f')
+    Countries_final.to_csv(savepath+"countries_table.csv", index = False, sep = ';', float_format = '%.2f')
+    Institutions_final.to_csv(savepath+"institutions_table.csv", index = False, sep = ';', float_format = '%.2f')
