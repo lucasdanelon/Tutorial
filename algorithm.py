@@ -68,8 +68,8 @@ def main():
     Authors_final = dict_to_df(Authors_Dict,"Authors","Scores")
     Countries_final = dict_to_df(Countries_Dict,"Countries","Scores")
 
-    Authors_final.to_csv("test.csv")
-    Countries_final.to_csv("test2.csv")
+    Authors_final.to_csv("authors_score.csv")
+    Countries_final.to_csv("countries_score.csv")
 
 if __name__=="__main__":
     main()
