@@ -49,7 +49,7 @@ def main():
                        "Page count","Link","Authors with affiliations",
                        "Abstract","Author Keywords", "Index Keywords", "References",
                        "Conference location","Conference code", "Abbreviated Source Title",
-                       "Document Type", "Publication Stage", "Access Type", "Source", "EID",
+                       "Document Type", "Publication Stage", "Open Access", "Source", "EID",
                        "Sponsors", "Conference name", "Conference date"]
 
     base = base.drop(columns = columns_to_drop)
