@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+#normalizes howardnator, considers citations per article
+
 #Define score formula
 def score(n_elems, p_elem):
     coef = 1.5**(n_elems - p_elem)/(np.sum(1.5**(np.arange(1, n_elems + 1 ) - 1)))
@@ -68,8 +70,8 @@ def main():
     Authors_final = dict_to_df(Authors_Dict,"Authors","Scores")
     Countries_final = dict_to_df(Countries_Dict,"Countries","Scores")
 
-    Authors_final.to_csv("authors_score.csv")
-    Countries_final.to_csv("countries_score.csv")
+    Authors_final.to_csv("1_authors_score.csv")
+    Countries_final.to_csv("2_countries_score.csv")
 
 if __name__=="__main__":
     main()

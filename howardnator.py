@@ -140,6 +140,6 @@ if __name__=="__main__":
     Authors_final, Countries_final, Institutions_final = main(filename)
 
     savepath=""
-    Authors_final.to_csv(savepath+"authors_table.csv", index = False, sep = ';', float_format = '%.2f')
-    Countries_final.to_csv(savepath+"countries_table.csv", index = False, sep = ';', float_format = '%.2f')
-    Institutions_final.to_csv(savepath+"institutions_table.csv", index = False, sep = ';', float_format = '%.2f')
+    Authors_final.to_csv(savepath+"3_authors_table.csv", index = False, sep = ';', float_format = '%.2f')
+    Countries_final.to_csv(savepath+"4_countries_table.csv", index = False, sep = ';', float_format = '%.2f')
+    Institutions_final.to_csv(savepath+"5_institutions_table.csv", index = False, sep = ';', float_format = '%.2f')

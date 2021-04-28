@@ -10,8 +10,6 @@ Takes a scopus.csv file as input and generates test.csv and test2.csv
 
 Go to [https://www.scopus.com/](https://) , research the subject that you want to analyse, filter as needed and then export such as the image shows:
 
-![alt text](https://github.com/gustavo-luz/blob/master/Tutorial.git/typical_output/scopus_selection.png?raw=true)
-
 ![Alt text](/typical_output/scopus_selection.png?raw=True)
 
 
