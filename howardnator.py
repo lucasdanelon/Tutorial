@@ -135,7 +135,7 @@ def main(filename):
     return Authors_final, Countries_final, Institutions_final
 
 if __name__=="__main__":
-    filename="formula.csv"
+    filename="/home/gustavo/python/pgref/Tutorial/HAR.csv"
 
     Authors_final, Countries_final, Institutions_final = main(filename)
 
